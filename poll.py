@@ -1,15 +1,16 @@
 import requests
 
-from myparser import MyHTMLParser
+from asucourseparser import ASUCoursesHTMLParser
 
 
+# TODO: wrap in class
 def get_response(url):
     return requests.get(url)
 
 
 def poll_site(url):
     response = get_response(url)
-    parser = MyHTMLParser()
+    # TODO: modularize parsers
+    parser = ASUCoursesHTMLParser()
     parser.feed(response.text)
-    print(parser.courses)
-    return response
+    return parser.courses

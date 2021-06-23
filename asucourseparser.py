@@ -1,7 +1,7 @@
 from html.parser import HTMLParser
 
 
-class MyHTMLParser(HTMLParser):
+class ASUCoursesHTMLParser(HTMLParser):
     def __init__(self):
         HTMLParser.__init__(self)
         self.recording = False
