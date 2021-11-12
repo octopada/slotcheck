@@ -1,0 +1,1 @@
+C:\Users\gogol\.virtualenvs\slotcheck-R_nI6Wy4\Scripts\python.exe C:/Users/gogol/PycharmProjects/slotcheck/main.py

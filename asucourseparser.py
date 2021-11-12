@@ -6,22 +6,23 @@ class ASUCoursesHTMLParser(HTMLParser):
         HTMLParser.__init__(self)
         self.recording = False
         self.courses = set()
+        self.candidate_course = ""
 
     def error(self, message):
         pass
 
     def handle_starttag(self, tag, attrs):
-        if tag != 'td':
+        if tag != 'td' and tag != 'i':
             return
         if self.recording:
             self.recording = True
             return
         for name, value in attrs:
             if name == 'class' and value == 'subjectNumberColumnValue nowrap ':
-                break
-            else:
-                return
-        self.recording = True
+                self.recording = True
+            if name == 'class' and value == 'fa fa-circle green':
+                if len(self.candidate_course) != 0:
+                    self.courses.add(self.candidate_course)
 
     def handle_endtag(self, tag):
         if tag == 'td' and self.recording:
@@ -31,4 +32,4 @@ class ASUCoursesHTMLParser(HTMLParser):
         if self.recording:
             course_name = str(data).strip()
             if len(course_name) != 0:
-                self.courses.add(course_name)
+                self.candidate_course = course_name
